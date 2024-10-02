@@ -1,1 +1,23 @@
 <router-outlet></router-outlet>
+<p-toast>
+    <ng-template let-message pTemplate="message">
+      <span
+        class="{{ 'p-toast-message-icon ' + errorTypeIcons[message.severity] }}"
+      ></span>
+      <div class="p-toast-message-text">
+        <div class="p-toast-summary">{{ message.summary }}</div>
+        <div class="p-toast-detail">
+          <ul
+            [ngClass]="{
+              'list-disc': message.detail.split(messageSplitRegex).length > 1
+            }"
+          >
+            <li *ngFor="let msg of message.detail.split(messageSplitRegex)">
+              {{ removeHashcharacter(msg) }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+<ng-http-loader spinner="sk-wandering-cubes"></ng-http-loader>

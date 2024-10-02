@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'online-shopping ';
+  public messageSplitRegex: RegExp;
+  errorTypeIcons: { [key: string]: string } = {
+    success: 'icon-success',
+    info: 'icon-info',
+    warn: 'icon-warn',
+    error: 'icon-error'
+  };
+
+  constructor(
+    public primeNGConfig: PrimeNGConfig,
+    private renderer: Renderer2
+  ) {
+    this.messageSplitRegex = new RegExp(/(?<=\#)/);
+  }
+
+  removeHashcharacter(msg: string) {
+    return msg.replace(/#$/, '');
+  }
 }

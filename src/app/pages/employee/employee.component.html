@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="form-header">
+        <div class="row">
+            <div class="col-6">
+                <h2>Employee</h2>
+            </div>
+            <div class="col-6">
+              <div>
+                <input 
+                  type="text" 
+                  placeholder="Search employees" 
+                  [(ngModel)]="searchTerm" 
+                  (keyup)="searchEmployees(searchTerm)" 
+                />
+              </div>
+            <button class="btn btn-primary f-right" (click)="addEmployee()">Add Emp</button>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="empfom" *ngIf="isFormVisable">
+        <form #employeeForm="ngForm">
+            <div class="row">
+              <div class="col">
+                <label for="inputEmail4">Employee Name</label>
+                <input type="text"  class="form-control" name="employeeName" [(ngModel)]="employeeObj.employeeName" placeholder="employee name">
+              </div>
+              <div class="col">
+                <label for="inputEmail4">Contact No</label>
+                <input type="numberS" class="form-control" name="contactNo" [(ngModel)]="employeeObj.contactNo" placeholder="Lcontact no">
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label for="inputEmail4">Email</label>
+                  <input type="email" class="form-control" name="emailId" [(ngModel)]="employeeObj.emailId" placeholder="email">
+                </div>
+                <div class="col-4">
+                    <label for="parentDeptId">Parent Dept</label>
+                    <select class="form-control" name="parentDeptId" [(ngModel)]="parentDeptId" (change)="onParentDeptChange()">
+                      <option value="" disabled selected>Select Department</option>
+                      <option *ngFor="let dep of parentDepartment" [value]="dep.departmentId">
+                        {{ dep.departmentName }}
+                      </option>
+                    </select>
+                  </div>
+                <div class="col-4">
+                    <label for="inputEmail4">Chaild Dept</label>
+                    <select class="form-control" name="deptId" [(ngModel)]="employeeObj.deptId" >
+                        <option>Select Department</option>
+                        <option *ngFor="let chidep of chaildDeptList" [value]="chidep.childDeptId">{{chidep.departmentName}}</option>
+                    
+                      </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="inputEmail4">Password</label>
+                  <input type="text" class="form-control" name="password" [(ngModel)]="employeeObj.password" placeholder="password">
+                </div>
+                <div class="col">
+                  <label for="inputEmail4">Role</label>
+                  <input type="numberS" [(ngModel)]="employeeObj.role" name="role" class="form-control" placeholder="role">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="inputEmail4">Gender</label>
+                  <select class="form-control" name="gender" [(ngModel)]="employeeObj.gender">
+                    <option selected>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div class="col">
+                    <button (click)="createEmployee(employeeForm)" class="btn btn-success f-right mt-4 ml-2">Save <i class="fa fa-check" aria-hidden="true"></i></button>
+                    <button (click)="closeForm()" class="btn btn-danger f-right mt-4">Close <i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              
+          </form>
+    </div>
+
+    <table class="table m-3">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Employee Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col">Role</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Action</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of filtredEmployee">
+            <th>{{emp.employeeId}}</th>
+            <td>{{emp.employeeName}}</td>
+            <td>{{emp.contactNo}}</td>
+            <td>{{emp.emailId}}</td>
+            <th>{{emp.deptId}}</th>
+            <td>{{emp.role}}</td>
+            <td>{{emp.gender}}</td>
+            <td><button (click)="edit(emp)" class="btn btn-warning">Edit <i class="fa fa-pencil ml-2" aria-hidden="true"></i></button>
+                <button (click)="deletEmp(emp.employeeId)" class="btn btn-danger ml-2">Delete <i class="fa fa-trash ml-2" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+       
+      </table>
+   
+    
+</div>

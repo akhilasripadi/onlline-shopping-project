@@ -1,10 +1,10 @@
-import { NgModule} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+
 import { ButtonModule } from 'primeng/button';
-import { HomeComponent } from './home/home.component';
+
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +19,23 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PanelModule } from 'primeng/panel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './pages/login/login.component';
+import { EmployeeComponent } from './pages/employee/employee.component';
+import { LayoutComponent } from './pages/layout/layout.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
+import { ProjectEmployeeComponent } from './pages/project-employee/project-employee.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EmployeeService } from './services/employee.service';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { TranslateModule } from '@ngx-translate/core';
+import { NotificationService } from './services/notification.service';
+import { CssannimationsComponent } from './pages/cssannimations/cssannimations.component';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api'; 
+
+
 
 
 
@@ -28,10 +45,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    EmployeeComponent,
+    LayoutComponent,
+    ProjectsComponent,
+    DashboardComponent,
+
+    ProjectEmployeeComponent,
+     CssannimationsComponent,
+   
+ 
     
     
 
@@ -54,13 +80,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NoopAnimationsModule,
     PanelModule,
     ProgressSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    NgHttpLoaderModule.forRoot(),
+    TranslateModule.forRoot(),
+    ToastModule,
+    
     
 
     
     
   ],
-  providers: [ProductsService],
+  providers: [ProductsService,EmployeeService,NotificationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
